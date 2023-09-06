@@ -18,7 +18,7 @@ const run = async () => {
     const header = `Running Page Speed Insights for ${url}`;
     console.log(header);
     core.setOutput('outputTestHeader', header);
-   ;(async () => {
+    (async () => {
       const results = await psi.output(url, {
         ...(key ? {key} : undefined),
         ...(key ? undefined : {nokey: "true"}),
@@ -33,6 +33,15 @@ const run = async () => {
       exec(`echo "MY_OUTPUT_NAME=${outputValue}" >> $GITHUB_OUTPUT`);
       console.log(results);
     })();
+    const { exec } = require('child_process');
+    const outputValue = await psi.output(url, {
+        ...(key ? {key} : undefined),
+        ...(key ? undefined : {nokey: "true"}),
+        strategy,
+        format: "cli",
+        threshold
+    });
+    exec(`echo "MY_OUTPUT_NAME2=${outputValue}" >> $GITHUB_OUTPUT`);
   } catch (error) {
     core.setOutput('outputTestError', error.message);
     core.setFailed(error.message);
