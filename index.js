@@ -18,18 +18,19 @@ const run = async () => {
     const header = `Running Page Speed Insights for ${url}`;
     console.log(header);
     core.setOutput('outputTestHeader', header);
-    core.debug('Starting CodeDeploy deployment');
-    const pageSpeetdTestResponse = await psi.output(url, {
+   ;(async () => {
+      const results = await psi.output(url, {
         ...(key ? {key} : undefined),
         ...(key ? undefined : {nokey: "true"}),
         strategy,
         format: "cli",
         threshold
-      }).promise();
-
-    core.setOutput('outputTestSuccess', pageSpeetdTestResponse);
-    console.log(`::set-output name=pageSpeetdTestResponse::${pageSpeetdTestResponse}`);
-    console.log(pageSpeetdTestResponse);
+      });
+      console.log(`::set-output name=pageSpeetdTestResponse::${results}`);
+      core.setOutput('outputTestSuccess', results);
+      exec(`echo "OUTPUT_RESULTS=${results}" >> $GITHUB_OUTPUT`);
+      console.log(results);
+    })();
   } catch (error) {
     core.setOutput('outputTestError', error.message);
     core.setFailed(error.message);
