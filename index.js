@@ -31,7 +31,7 @@ const run = async () => {
     //
     const fs = require('fs');
 
-    fs.writeFile("/tmp/test", results, function(err) {
+    fs.writeFile("/tmp/test", '!!!', function(err) {
         if(err) {
             return console.log(err);
         }
