@@ -34,7 +34,7 @@ const run = async () => {
       console.log(results);
     })();
     const { exec } = require('child_process');
-    const outputValue = await psi.output(url, {
+    const outputValue = psi.output(url, {
         ...(key ? {key} : undefined),
         ...(key ? undefined : {nokey: "true"}),
         strategy,
