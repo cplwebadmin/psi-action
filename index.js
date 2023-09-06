@@ -26,6 +26,7 @@ const run = async () => {
         threshold
       });
       core.setOutput('outputTestSuccess', results);
+      console.log(`::set-output name=matrix::${results}`);
       console.log(results);
     })();
   } catch (error) {
