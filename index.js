@@ -16,8 +16,9 @@ const run = async () => {
     const strategy = core.getInput("strategy") || "mobile";
     // Output a formatted report to the terminal
     const header = `Running Page Speed Insights for ${url}`;
-    exec(`echo "OUTPUT_HEADER=${header}" >> $GITHUB_OUTPUT`);
     console.log(header);
+    exec(`echo "OUTPUT_HEADER=${header}" >> $GITHUB_OUTPUT`);
+    
     const results = await psi.output(url, {
       ...(key ? {key} : undefined),
       ...(key ? undefined : {nokey: "true"}),
@@ -25,8 +26,8 @@ const run = async () => {
       format: "cli",
       threshold
     });
-    exec(`echo "OUTPUT_BODY=${results}" >> $GITHUB_OUTPUT`);
     console.log(results);
+    exec(`echo "OUTPUT_BODY=${results}" >> $GITHUB_OUTPUT`);
   } catch (error) {
     core.setOutput('outputTestError', error.message);
     core.setFailed(error.message);
