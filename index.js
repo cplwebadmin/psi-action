@@ -23,7 +23,7 @@ const run = async () => {
         strategy,
         format: "cli",
         threshold
-      }).promise();
+      });
     core.setOutput('outputTestResults', results);
   } catch (error) {
     core.setOutput('outputTestError', error.message);
