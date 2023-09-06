@@ -28,6 +28,16 @@ const run = async () => {
     });
     console.log(results);
     exec(`echo "OUTPUT_BODY=${results}" >> $GITHUB_OUTPUT`);
+    //
+    const fs = require('fs');
+
+    fs.writeFile("/tmp/test", "Hey there!", function(err) {
+        if(err) {
+            return console.log(err);
+        }
+        console.log("The file was saved!");
+    });
+    
   } catch (error) {
     core.setOutput('outputTestError', error.message);
     core.setFailed(error.message);
