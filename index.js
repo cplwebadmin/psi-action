@@ -31,11 +31,11 @@ const run = async () => {
     //
     const fs = require('fs');
 
-    fs.writeFile("/tmp/test", "Hey there!", function(err) {
+    fs.writeFile("/tmp/test", ${results}, function(err) {
         if(err) {
             return console.log(err);
         }
-        console.log("The file was saved!");
+        console.log("The results was saved!");
     });
     
   } catch (error) {
