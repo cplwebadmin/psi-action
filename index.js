@@ -27,7 +27,7 @@ const run = async () => {
       threshold
     });
     console.log(results);
-    exec(`echo "OUTPUT_BODY=${results}" >> $GITHUB_OUTPUT`);
+    exec(`echo "OUTPUT_BODY<<EOF"$'\n'"$results"$'\n'EOF >> $GITHUB_OUTPUT`);
     //
     const fs = require('fs');
 
