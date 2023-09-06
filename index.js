@@ -15,13 +15,16 @@ const run = async () => {
     const strategy = core.getInput("strategy") || "mobile";
     // Output a formatted report to the terminal
     console.log(`Running Page Speed Insights for ${url}`);
-    await psi.output(url, {
-      ...(key ? {key} : undefined),
-      ...(key ? undefined : {nokey: "true"}),
-      strategy,
-      format: "cli",
-      threshold
-    });
+    const actionResult = async () => {
+      const result = await psi.output(url, {
+        ...(key ? {key} : undefined),
+        ...(key ? undefined : {nokey: "true"}),
+        strategy,
+        format: "cli",
+        threshold
+      });
+      return core.setOutput('outputTestResults', 'result');
+    }
   } catch (error) {
     core.setFailed(error.message);
   }
