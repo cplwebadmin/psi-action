@@ -26,18 +26,8 @@ const run = async () => {
       format: "cli",
       threshold
     });
-    console.log(results);
-    exec(`echo "OUTPUT_BODY<<EOF"$'\n'"$results"$'\n'EOF >> $GITHUB_OUTPUT`);
-    //
-    const fs = require('fs');
-
-    fs.writeFile("/tmp/test", '!!!', function(err) {
-        if(err) {
-            return console.log(err);
-        }
-        console.log("The results was saved!");
-    });
     
+    console.log(results);
   } catch (error) {
     core.setOutput('outputTestError', error.message);
     core.setFailed(error.message);
