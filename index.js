@@ -25,9 +25,8 @@ const run = async () => {
         format: "cli",
         threshold
       });
-      return result;
+      core.setOutput('outputTestSuccess', result);
     }
-    core.setOutput('outputTestSuccess', asyncResults);
   } catch (error) {
     core.setOutput('outputTestError', error.message);
     core.setFailed(error.message);
