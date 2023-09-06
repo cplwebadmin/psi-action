@@ -18,17 +18,15 @@ const run = async () => {
     const header = `Running Page Speed Insights for ${url}`;
     exec(`echo "OUTPUT_HEADER=${header}" >> $GITHUB_OUTPUT`);
     console.log(header);
-    (async () => {
-      const results = await psi.output(url, {
-        ...(key ? {key} : undefined),
-        ...(key ? undefined : {nokey: "true"}),
-        strategy,
-        format: "cli",
-        threshold
-      });
-      exec(`echo "OUTPUT_BODY=${results}" >> $GITHUB_OUTPUT`);
-      console.log(results);
-    })();
+    const results = await psi.output(url, {
+      ...(key ? {key} : undefined),
+      ...(key ? undefined : {nokey: "true"}),
+      strategy,
+      format: "cli",
+      threshold
+    });
+    exec(`echo "OUTPUT_BODY=${results}" >> $GITHUB_OUTPUT`);
+    console.log(results);
   } catch (error) {
     core.setOutput('outputTestError', error.message);
     core.setFailed(error.message);
