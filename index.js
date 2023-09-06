@@ -1,4 +1,4 @@
-const core = require("@actions/core");
+ecconst core = require("@actions/core");
 const exec = require('@actions/exec');
 const psi = require("psi");
 
@@ -28,7 +28,8 @@ const run = async () => {
       });
       console.log(`::set-output name=pageSpeetdTestResponse::${results}`);
       core.setOutput('outputTestSuccess', results);
-      exec(`echo "OUTPUT_RESULTS=${results}" >> $GITHUB_OUTPUT`);
+      exec.exec(`echo "OUTPUT_RESULTS=${results}" >> $GITHUB_OUTPUT`);
+      await exec.exec(`echo "OUTPUT_RESULTS=${results}" >> $GITHUB_OUTPUT`);
       console.log(results);
     })();
   } catch (error) {
