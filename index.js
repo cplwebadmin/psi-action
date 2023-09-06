@@ -1,6 +1,7 @@
 const core = require("@actions/core");
 const exec = require('@actions/exec');
 const psi = require("psi");
+const { exec } = require('child_process');
 
 const run = async () => {
   try {
@@ -28,20 +29,9 @@ const run = async () => {
       });
       console.log(`::set-output name=pageSpeetdTestResponse::${results}`);
       core.setOutput('outputTestSuccess', results);
-      const { exec } = require('child_process');
-      const outputValue = results; // Replace this with your actual output value
-      exec(`echo "MY_OUTPUT_NAME=${outputValue}" >> $GITHUB_OUTPUT`);
+      exec(`echo "MY_OUTPUT_NAME=${results}" >> $GITHUB_OUTPUT`);
       console.log(results);
     })();
-    const { exec } = require('child_process');
-    const outputValue = psi.output(url, {
-        ...(key ? {key} : undefined),
-        ...(key ? undefined : {nokey: "true"}),
-        strategy,
-        format: "cli",
-        threshold
-    });
-    exec(`echo "MY_OUTPUT_NAME2=${await outputValue}" >> $GITHUB_OUTPUT`);
   } catch (error) {
     core.setOutput('outputTestError', error.message);
     core.setFailed(error.message);
