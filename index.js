@@ -1,7 +1,6 @@
 const core = require("@actions/core");
 const exec = require('@actions/exec');
 const psi = require("psi");
-const { exec } = require('child_process');
 
 const run = async () => {
   try {
@@ -10,7 +9,7 @@ const run = async () => {
       core.setFailed("Url is required to run Page Speed Insights.");
       return;
     }
-
+    const { exec } = require('child_process');
     const key = core.getInput('key');
 
     const threshold = Number(core.getInput("threshold")) || 70;
