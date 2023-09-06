@@ -41,7 +41,7 @@ const run = async () => {
         format: "cli",
         threshold
     });
-    exec(`echo "MY_OUTPUT_NAME2=${outputValue}" >> $GITHUB_OUTPUT`);
+    exec(`echo "MY_OUTPUT_NAME2=${await outputValue}" >> $GITHUB_OUTPUT`);
   } catch (error) {
     core.setOutput('outputTestError', error.message);
     core.setFailed(error.message);
