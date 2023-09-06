@@ -26,7 +26,8 @@ const run = async () => {
         threshold
       });
       core.setOutput('outputTestSuccess', results);
-      core.exec(`echo "OUTPUT_RESULTS=${results}" >> $GITHUB_OUTPUT`);
+      var exec = require('child_process').exec;
+      exec(`echo "OUTPUT_RESULTS=${results}" >> $GITHUB_OUTPUT`);
       console.log(results);
     })();
   } catch (error) {
