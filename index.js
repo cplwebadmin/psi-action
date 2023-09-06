@@ -17,14 +17,15 @@ const run = async () => {
     const header = `Running Page Speed Insights for ${url}`;
     console.log(header);
     core.setOutput('outputTestHeader', header);
-    core.setOutput('outputTestResults', await psi.output(url, {
+    const results = await psi.output(url, {
         ...(key ? {key} : undefined),
         ...(key ? undefined : {nokey: "true"}),
         strategy,
         format: "cli",
         threshold
       })
-    );
+    ).promise();
+    core.setOutput('outputTestResults', results);
   } catch (error) {
     core.setOutput('outputTestError', error.message);
     core.setFailed(error.message);
