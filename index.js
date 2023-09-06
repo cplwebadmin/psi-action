@@ -19,7 +19,7 @@ const run = async () => {
     console.log(header);
     exec(`echo "OUTPUT_HEADER=${header}" >> $GITHUB_OUTPUT`);
     
-    const results = await psi.output(url, {
+    await psi.output(url, {
       ...(key ? {key} : undefined),
       ...(key ? undefined : {nokey: "true"}),
       strategy,
@@ -27,7 +27,6 @@ const run = async () => {
       threshold
     });
     
-    console.log(results);
   } catch (error) {
     core.setOutput('outputTestError', error.message);
     core.setFailed(error.message);
