@@ -26,7 +26,7 @@ const run = async () => {
         threshold
       });
       core.setOutput('outputTestSuccess', results);
-      exec(`echo "OUTPUT_RESULTS=${results}" >> $GITHUB_OUTPUT`);
+      core.exec(`echo "OUTPUT_RESULTS=${results}" >> $GITHUB_OUTPUT`);
       console.log(results);
     })();
   } catch (error) {
