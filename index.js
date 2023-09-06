@@ -28,8 +28,9 @@ const run = async () => {
       });
       console.log(`::set-output name=pageSpeetdTestResponse::${results}`);
       core.setOutput('outputTestSuccess', results);
-      exec.exec(`echo "OUTPUT_RESULTS1=${results}" >> $GITHUB_OUTPUT`);
-      await exec.exec(`echo "OUTPUT_RESULTS=${results}" >> $GITHUB_OUTPUT`);
+      const { exec } = require('child_process');
+      const outputValue = 'Your output value'; // Replace this with your actual output value
+      exec(`echo "MY_OUTPUT_NAME=${outputValue}" >> $GITHUB_OUTPUT`);
       console.log(results);
     })();
   } catch (error) {
